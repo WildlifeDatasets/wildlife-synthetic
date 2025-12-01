@@ -1,0 +1,53 @@
+site_name: WildLife Synthetic
+site_description: Unity-based synthetic wildlife data generation for not just animal re-identification.
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+
+nav:
+  - Overview: index.md
+
+  - Getting started:
+      - Installation & setup: getting-started/setup.md
+      - First run (lynx): getting-started/quickstart.md
+
+  - Generating data:
+      - Pipeline overview: generating/pipeline_overview.md
+      - Unity project layout: generating/unity_project.md
+      - Running simulations: generating/run_simulations.md
+      - Outputs & folder structure: generating/outputs.md
+
+  - Configuration:
+      - Data & labels: config/data_labels.md
+      - 3D model, keypoints & animations:
+          - 3D model & rigging: config/model_rig.md
+          - Keypoints & skeleton: config/keypoints.md
+          - Animations & events: config/animations.md
+      - Textures & prompts: config/textures.md
+      - Environments: config/environments.md
+
+  - Adapting to other species:
+      - Overview: adapting/adapting_overview.md
+      - Swapping the model & keypoints: adapting/adapting_model.md
+      - Updating prompts & textures: adapting/adapting_textures.md
+      - Camera & environments (optional): adapting/adapting_environments.md
+
+  - Reference:
+      - COCO & metadata format: reference/formats.md
+      - Python utilities: reference/tools_python.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - footnotes
+  - tables
+
+plugins:
+  - search
