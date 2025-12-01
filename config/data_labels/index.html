@@ -1,0 +1,1630 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Unity-based synthetic wildlife data generation for not just animal re-identification.">
+      
+      
+      
+      
+        <link rel="prev" href="../../generating/outputs/">
+      
+      
+        <link rel="next" href="../model_rig/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Data & labels - WildLife Synthetic</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-and-labels" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="WildLife Synthetic" class="md-header__button md-logo" aria-label="WildLife Synthetic" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            WildLife Synthetic
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data & labels
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/setup/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../generating/pipeline_overview/" class="md-tabs__link">
+          
+  
+  
+  Generating data
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Configuration
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../adapting/adapting_overview/" class="md-tabs__link">
+          
+  
+  
+  Adapting to other species
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/formats/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="WildLife Synthetic" class="md-nav__button md-logo" aria-label="WildLife Synthetic" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    WildLife Synthetic
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation & setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First run (lynx)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generating data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generating data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../generating/pipeline_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../generating/unity_project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity project layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../generating/run_simulations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running simulations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../generating/outputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Outputs & folder structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & labels
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & labels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-real-vs-synthetic-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Real vs synthetic data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-common-image-level-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Common image-level fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pose-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pose annotations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Pose annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-keypoint-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Keypoint layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-storage-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Storage format
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-identity-labels-re-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Identity labels (re-identification)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-segmentation-masks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Segmentation masks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-bounding-boxes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Bounding boxes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-task-membership-and-splits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Task membership and splits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D model, keypoints & animations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3D model, keypoints & animations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model_rig/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D model & rigging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keypoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keypoints & skeleton
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../animations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Animations & events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../textures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Textures & prompts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adapting to other species
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Adapting to other species
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adapting/adapting_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adapting/adapting_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Swapping the model & keypoints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adapting/adapting_textures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Updating prompts & textures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adapting/adapting_environments.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camera & environments (optional)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    COCO & metadata format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/tools_python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="data-and-labels">Data and labels<a class="headerlink" href="#data-and-labels" title="Permanent link">&para;</a></h1>
+<p>This page describes what the WildLife Synthetic pipeline produces for each frame and how these outputs map to the three main downstream tasks:</p>
+<ul>
+<li>individual identification (re-identification),</li>
+<li>pose estimation,</li>
+<li>instance segmentation.</li>
+</ul>
+<p>The goal is to make it clear <strong>what is stored for each image</strong> and how the same underlying data can be reused across tasks.</p>
+<hr />
+<h2 id="1-real-vs-synthetic-data">1. Real vs synthetic data<a class="headerlink" href="#1-real-vs-synthetic-data" title="Permanent link">&para;</a></h2>
+<p>The pipeline can generate <strong>synthetic</strong> images directly in Unity and can also be used to align annotations with <strong>real</strong> camera-trap images (for example, in the CzechLynx dataset).</p>
+<p>In practice, you will see two main sources:</p>
+<ul>
+<li><strong>Real images</strong></li>
+<li>Captured by camera traps in the field.</li>
+<li>
+<p>Annotated manually (identities, masks, pose on a subset).</p>
+</li>
+<li>
+<p><strong>Synthetic images</strong></p>
+</li>
+<li>Rendered from Unity using the 3D model and environments.</li>
+<li>Annotated automatically with keypoints, identity labels, and (optionally) masks.</li>
+</ul>
+<p>The metadata format is shared so that downstream code can handle both real and synthetic samples in a unified way. A field such as <code>source</code> or <code>is_synthetic</code> can be used to distinguish them.</p>
+<hr />
+<h2 id="2-common-image-level-fields">2. Common image-level fields<a class="headerlink" href="#2-common-image-level-fields" title="Permanent link">&para;</a></h2>
+<p>Every image in the metadata file has a set of <strong>image-level attributes</strong>.<br />
+The exact field names can vary between projects, but conceptually you can expect:</p>
+<ul>
+<li><code>image_id</code> — unique identifier for the image.</li>
+<li><code>file_name</code> — relative path to the image file, e.g. <code>images/scene0/scene0_000123.jpg</code>.</li>
+<li><code>width</code>, <code>height</code> — image resolution in pixels.</li>
+<li><code>scene_id</code> — identifier of the Unity scene (for synthetic) or camera-trap site (for real).</li>
+<li><code>timestamp</code> — simulated or real capture time, if available.</li>
+<li><code>source</code> — e.g. <code>real</code> or <code>synthetic</code>.</li>
+</ul>
+<p>In addition, the shared metadata file encodes, for each downstream task, whether the record is used and in which split (train, validation, test).<br />
+This allows the same underlying data package to be filtered into task-specific subsets without maintaining separate annotation files for each task.</p>
+<hr />
+<h2 id="3-pose-annotations">3. Pose annotations<a class="headerlink" href="#3-pose-annotations" title="Permanent link">&para;</a></h2>
+<p>For pose estimation, each image can include <strong>2D keypoint annotations</strong> for each visible individual.</p>
+<h3 id="31-keypoint-layout">3.1 Keypoint layout<a class="headerlink" href="#31-keypoint-layout" title="Permanent link">&para;</a></h3>
+<p>A fixed keypoint layout is used, typically:</p>
+<ul>
+<li>head, neck, spine points,</li>
+<li>shoulders, elbows, wrists (front legs),</li>
+<li>hips, knees, ankles (hind legs),</li>
+<li>tail base and additional tail points.</li>
+</ul>
+<p>For CzechLynx, a 20-keypoint layout is used, but the exact list can be adapted for other species.<br />
+Keypoints are defined in 3D on the rig and projected into image coordinates in Unity.</p>
+<h3 id="32-storage-format">3.2 Storage format<a class="headerlink" href="#32-storage-format" title="Permanent link">&para;</a></h3>
+<p>Keypoints are usually stored in a COCO-compatible format.<br />
+Conceptually, each annotation entry includes:</p>
+<ul>
+<li><code>image_id</code> — link to the image,</li>
+<li><code>category_id</code> — class label (e.g., <code>1</code> for lynx),</li>
+<li><code>keypoints</code> — flattened list <code>[x1, y1, v1, x2, y2, v2, ...]</code>,</li>
+<li><code>num_keypoints</code> — number of visible keypoints,</li>
+<li>optionally <code>id</code> and <code>bbox</code>.</li>
+</ul>
+<p>The visibility flag <code>v</code> typically follows the COCO convention:</p>
+<ul>
+<li><code>0</code> – not labeled (or not in image),</li>
+<li><code>1</code> – labeled but not visible (occluded),</li>
+<li><code>2</code> – labeled and visible.</li>
+</ul>
+<p>A simplified example:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;image_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;category_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;keypoints&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">320</span><span class="p">,</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">340</span><span class="p">,</span><span class="w"> </span><span class="mi">190</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">360</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;num_keypoints&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>For real images, only a subset is annotated with pose due to the manual effort.<br />
+For synthetic images, keypoints can be exported for every frame.</p>
+<hr />
+<h2 id="4-identity-labels-re-identification">4. Identity labels (re-identification)<a class="headerlink" href="#4-identity-labels-re-identification" title="Permanent link">&para;</a></h2>
+<p>For individual identification, each image that is suitable for re-ID includes an <strong>identity label</strong>.</p>
+<p>At minimum, the following information is stored:</p>
+<ul>
+<li><code>individual_id</code> — unique identifier for the individual.</li>
+<li><code>identity_source</code> — whether the identity comes from:</li>
+<li>expert-based matching (real images), or</li>
+<li>texture assignment (synthetic images).</li>
+<li><code>side</code> or <code>viewpoint</code> (optional) — e.g., left side, right side, frontal.</li>
+</ul>
+<p>In the synthetic case, <code>individual_id</code> is derived from the <strong>texture</strong> applied to the 3D model.<br />
+A single 3D mesh with different textures represents different individuals; the pipeline keeps track of which texture was active when each frame was captured.</p>
+<p>For real images, <code>individual_id</code> is derived from expert-based manual identification using flank, leg, or back patterns, and only images with clearly visible patterns are included in the re-ID subset.</p>
+<hr />
+<h2 id="5-segmentation-masks">5. Segmentation masks<a class="headerlink" href="#5-segmentation-masks" title="Permanent link">&para;</a></h2>
+<p>For instance segmentation, the dataset can provide <strong>pixel-wise masks</strong> of the animal’s body.</p>
+<p>There are two main storage options:</p>
+<ol>
+<li><strong>Separate mask images</strong>  </li>
+<li>Stored in a parallel folder structure, e.g. <code>masks/scene0/scene0_000123.png</code>.</li>
+<li>
+<p>Each pixel value indicates foreground vs background (binary masks).</p>
+</li>
+<li>
+<p><strong>Run-length encoding (RLE) in COCO format</strong>  </p>
+</li>
+<li>Masks are encoded as compressed RLE strings in the annotation file.</li>
+<li>This is more compact for large datasets and is directly compatible with many training libraries.</li>
+</ol>
+<p>A typical COCO-style annotation entry for segmentation includes:</p>
+<ul>
+<li><code>image_id</code> — link to the image,</li>
+<li><code>category_id</code> — class label (lynx),</li>
+<li><code>segmentation</code> — RLE or polygon,</li>
+<li><code>area</code> — area of the mask in pixels,</li>
+<li><code>bbox</code> — bounding box covering the mask.</li>
+</ul>
+<p>In the synthetic case, masks can be generated directly from the 3D rendering passes.<br />
+In the real case, masks are usually drawn manually in a labeling tool (e.g., CVAT) and then exported.</p>
+<hr />
+<h2 id="6-bounding-boxes">6. Bounding boxes<a class="headerlink" href="#6-bounding-boxes" title="Permanent link">&para;</a></h2>
+<p>Bounding boxes can be derived from either:</p>
+<ul>
+<li>the segmentation masks, or</li>
+<li>the projected 3D bounds of the mesh.</li>
+</ul>
+<p>They are typically stored as:</p>
+<ul>
+<li><code>bbox</code>: <code>[x_min, y_min, width, height]</code>.</li>
+</ul>
+<p>Bounding boxes are used by:</p>
+<ul>
+<li>object detectors,</li>
+<li>some re-ID pipelines (for cropping around the animal),</li>
+<li>and evaluation scripts that require bounding boxes even when masks are available.</li>
+</ul>
+<hr />
+<h2 id="7-task-membership-and-splits">7. Task membership and splits<a class="headerlink" href="#7-task-membership-and-splits" title="Permanent link">&para;</a></h2>
+<p>Since all tasks share the same underlying data package, the metadata file indicates <strong>which tasks use each record</strong> and in which splits.</p>
+<p>Conceptually, each image (or annotation) can have flags like:</p>
+<ul>
+<li><code>use_for_reid</code>: <code>true</code> / <code>false</code></li>
+<li><code>use_for_pose</code>: <code>true</code> / <code>false</code></li>
+<li><code>use_for_segmentation</code>: <code>true</code> / <code>false</code></li>
+<li><code>split_reid</code>: <code>"train"</code>, <code>"val"</code>, <code>"test"</code> (or <code>null</code> if unused)</li>
+<li><code>split_pose</code>: <code>"train"</code>, <code>"val"</code>, <code>"test"</code> (or <code>null</code>)</li>
+<li><code>split_segmentation</code>: <code>"train"</code>, <code>"val"</code>, <code>"test"</code> (or <code>null</code>)</li>
+</ul>
+<p>The exact field names may differ in your implementation, but the idea is:</p>
+<ul>
+<li>There is a <strong>single metadata file</strong>.</li>
+<li>For each image/annotation, it encodes:</li>
+<li>whether the sample is used by a given task,</li>
+<li>and, if so, in which split (train/val/test).</li>
+</ul>
+<p>This design avoids maintaining separate metadata files per task while still allowing clean, task-specific subsets to be extracted.</p>
+<hr />
+<h2 id="8-summary">8. Summary<a class="headerlink" href="#8-summary" title="Permanent link">&para;</a></h2>
+<p>In summary, each sample produced by the pipeline can provide:</p>
+<ul>
+<li>an RGB image,</li>
+<li>2D keypoints (pose),</li>
+<li>an identity label,</li>
+<li>a segmentation mask and bounding box,</li>
+<li>scene and camera metadata,</li>
+<li>and task/split flags for re-ID, pose, and segmentation.</li>
+</ul>
+<p>Downstream scripts can then:</p>
+<ul>
+<li>filter the dataset by task and split,</li>
+<li>convert the annotations into standard formats (e.g., COCO for pose and segmentation),</li>
+<li>and mix real and synthetic data in a controlled way.</li>
+</ul>
+<p>The later sections of the documentation describe how these labels are produced in Unity (for synthetic images) and how they align with the real CzechLynx dataset.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
